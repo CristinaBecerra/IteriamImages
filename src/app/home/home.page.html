@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Cristina Becerra
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated="true" placeholder="Escribe aquí para filtrar" (ionInput)="triggerFilterImages()"
+      [(ngModel)]="searchText"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let img of displayedImages" size="12" size-sm="6" size-lg="3">
+        <ion-card class="defaultCard">
+          <img alt="Image number {{ img.id }}" [src]="img.photo" (error)="img.photo = 'assets/image_not_found.jpg'" />
+          <ion-card-header>
+            <ion-card-title>Id: {{ img.id }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{ img.text }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
